@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel - Frontend Web Developer</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +15,7 @@
         --card-bg: #102a43;
         --text-primary: #e0e7ff;
         --text-secondary: #bcccdc;
-        --glass-bg: rgba(10, 25, 47, 0.8);
+        --glass-bg: rgba(10, 25, 47, 0.85);
         --glass-border: rgba(166, 255, 0, 0.15);
         --font-family: "Poppins", sans-serif;
         --header-height: 70px;
@@ -139,7 +138,7 @@
         left: 0;
         width: 100%;
         background-color: var(--dark-bg);
-        padding: 20px 0;
+        padding: 40px 0;
         border-bottom: 1px solid var(--glass-border);
         z-index: 999;
         max-height: calc(100vh - var(--header-height));
@@ -164,8 +163,8 @@
       .mobile-nav a {
         text-decoration: none;
         color: var(--text-primary);
-        font-size: 1.2rem;
-        font-weight: 500;
+        font-size: 1.5rem;
+        font-weight: 600;
         padding: 10px 20px;
         display: block;
         transition: color 0.3s ease;
@@ -179,7 +178,7 @@
       /* Hero Section */
       .hero {
         min-height: 100vh;
-        background: linear-gradient(rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.5)),
+        background: linear-gradient(rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.4)),
           url("https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/IMG-20250617-WA0000-kfvscIGLLUC74Quc0TBECcFvLEwRUQ.jpg") no-repeat center center / cover;
         position: relative;
         display: flex;
@@ -187,6 +186,15 @@
         justify-content: center;
         padding-top: var(--header-height);
         overflow: hidden;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(10, 25, 47, 0.4);
       }
 
       .hero-content {
@@ -212,9 +220,9 @@
       }
 
       .hero-text-bottom-left h1 {
-        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-size: clamp(2.5rem, 6vw, 3.8rem);
         font-weight: 700;
-        line-height: 1.2;
+        line-height: 1.1;
         color: var(--text-primary);
       }
 
@@ -249,6 +257,7 @@
         align-items: center;
         gap: 10px;
         backdrop-filter: blur(5px);
+        width: fit-content;
       }
 
       .hero-cta-button {
@@ -256,44 +265,21 @@
         justify-self: center;
         background-color: var(--accent-green);
         color: var(--dark-bg);
-        padding: 14px 35px;
+        padding: 16px 35px;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
         border-radius: var(--border-radius-md);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.3s ease;
         font-size: 1rem;
         margin-top: 40px;
       }
 
       .hero-cta-button:hover {
-        transform: translateY(-3px) scale(1.03);
+        transform: translateY(-3px);
         box-shadow: 0 5px 25px rgba(166, 255, 0, 0.4);
       }
 
-      /* General Section Styling */
-      section {
-        padding: var(--section-padding);
-      }
-
-      section h2 {
-        font-size: clamp(2rem, 4vw, 2.8rem);
-        font-weight: 700;
-        color: var(--text-primary);
-        text-align: center;
-        margin-bottom: 15px;
-      }
-
-      section > h2::after {
-        content: "";
-        display: block;
-        width: 70px;
-        height: 4px;
-        background-color: var(--accent-green);
-        margin: 15px auto 60px auto;
-        border-radius: 2px;
-      }
-
-      /* Animations */
+      /* Hero Load Animations */
       .animate-on-load {
         opacity: 0;
         transform: translateY(30px);
@@ -310,9 +296,35 @@
       body.loaded .fade-up-delay-3 { transition-delay: 0.6s; }
       body.loaded .fade-up-delay-4 { transition-delay: 0.8s; }
 
+      /* General Section Styling */
+      section {
+        padding: var(--section-padding);
+        max-width: 1300px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      section h2 {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      section > h2::after {
+        content: "";
+        display: block;
+        width: 70px;
+        height: 4px;
+        background-color: var(--accent-green);
+        margin: 15px auto 60px auto;
+        border-radius: 2px;
+      }
+
       .scroll-animate {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(40px);
         transition: 0.8s ease-out;
       }
 
@@ -321,10 +333,8 @@
         transform: translateY(0);
       }
 
-      /* About Section */
+      /* About Intro Section */
       .about-intro-container {
-        max-width: 1100px;
-        margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr 2fr;
         gap: 60px;
@@ -368,28 +378,26 @@
         border: 3px solid var(--dark-bg);
       }
 
-      .about-intro-right p {
-        color: var(--text-secondary);
-        margin-bottom: 15px;
-        font-size: 1.05rem;
-      }
+      .about-intro-right h2 { text-align: left; }
+      .about-intro-right h2::after { margin-left: 0; }
+      .about-intro-right p { color: var(--text-secondary); margin-bottom: 15px; font-size: 1.05rem; }
 
-      /* Proficiencies */
+      /* Proficiencies Section */
       .proficiencies {
         background-color: var(--card-bg);
+        max-width: 100%;
       }
 
       .proficiencies-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
-        max-width: 1200px;
         margin: 0 auto;
       }
 
       .proficiency-card {
         background-color: var(--dark-bg);
-        padding: 30px;
+        padding: 40px 30px;
         border-radius: var(--border-radius-md);
         text-align: center;
         border: 1px solid var(--glass-border);
@@ -401,24 +409,20 @@
         box-shadow: 0 10px 30px rgba(166, 255, 0, 0.15);
       }
 
-      .proficiency-card i {
-        font-size: 3rem;
-        color: var(--accent-green);
-        margin-bottom: 20px;
-      }
+      .proficiency-card i { font-size: 3rem; color: var(--accent-green); margin-bottom: 20px; }
 
       /* Journey Section */
       .journey-container {
-        max-width: 1200px;
-        margin: 0 auto;
         display: grid;
         grid-template-columns: 1.2fr 1fr;
         gap: 50px;
         align-items: flex-start;
       }
 
+      .journey-text h2 { text-align: left; }
+      .journey-text h2::after { margin-left: 0; }
       .journey-text h3 { font-size: 1.8rem; margin-bottom: 5px; }
-      .journey-text h4 { color: var(--accent-green); margin-bottom: 20px; }
+      .journey-text h4 { font-size: 1.2rem; color: var(--accent-green); margin-bottom: 20px; }
       .journey-text p { color: var(--text-secondary); margin-bottom: 25px; }
 
       .stack-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
@@ -442,16 +446,15 @@
         border-radius: var(--border-radius-sm);
         overflow: hidden;
         border: 1px solid var(--glass-border);
+        min-height: 180px;
       }
 
-      .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-      .gallery-item.wide { grid-column: span 2; }
+      .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
       .gallery-item.tall { grid-row: span 2; }
+      .gallery-item.wide { grid-column: span 2; }
 
-      /* Projects */
+      /* Projects Showcase */
       .project-list {
-        max-width: 1000px;
-        margin: 0 auto;
         display: flex;
         flex-direction: column;
         gap: 80px;
@@ -471,15 +474,14 @@
         height: 300px;
         background-color: var(--card-bg);
         border-radius: var(--border-radius-md);
-        border: 1px solid var(--glass-border);
         overflow: hidden;
+        border: 1px solid var(--glass-border);
       }
 
       .project-image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
 
       .project-details h3 { font-size: 1.9rem; color: var(--accent-green); margin-bottom: 15px; }
       .project-details p { color: var(--text-secondary); margin-bottom: 20px; }
-
       .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
       .project-tech-stack span {
         background-color: var(--dark-bg);
@@ -501,37 +503,48 @@
         font-size: 0.95rem;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
       }
 
       .btn-primary { background-color: var(--accent-green); color: var(--dark-bg); border: 1px solid var(--accent-green); }
+      .btn-primary:hover { background-color: transparent; color: var(--accent-green); box-shadow: 0 0 15px rgba(166, 255, 0, 0.2); }
       .btn-outline { color: var(--accent-green); border: 1px solid var(--accent-green); }
-      .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(166, 255, 0, 0.2); }
+      .btn-outline:hover { background-color: var(--accent-green); color: var(--dark-bg); }
 
-      /* Footer & Socials */
-      .connect-cta { background-color: var(--card-bg); text-align: center; }
+      /* Connect CTA */
+      .connect-cta { background-color: var(--card-bg); text-align: center; max-width: 100%; }
+      .connect-content { max-width: 700px; margin: 0 auto; }
+      .connect-cta p { color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 35px; }
+      .btn-large { padding: 16px 45px; font-size: 1.1rem; border-radius: var(--border-radius-md); }
+
+      /* Socials Section */
+      .socials { text-align: center; }
       .social-icons-container { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
-      .social-icons-container a { color: var(--text-secondary); font-size: 2rem; transition: 0.3s; }
-      .social-icons-container a:hover { color: var(--accent-green); transform: translateY(-4px); }
+      .social-icons-container a { color: var(--text-secondary); font-size: 2rem; transition: 0.3s ease; }
+      .social-icons-container a:hover { color: var(--accent-green); transform: translateY(-5px); }
 
-      .main-footer-bottom { text-align: center; padding: 35px 20px; background-color: var(--dark-bg); border-top: 1px solid var(--glass-border); color: var(--text-secondary); }
+      /* Footer */
+      .main-footer-bottom { text-align: center; padding: 35px 20px; background-color: var(--dark-bg); border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 0.9rem; }
 
-      /* RESPONSIVE QUERIES */
+      /* RESPONSIVE BREAKPOINTS */
       @media (max-width: 992px) {
         .hero-content {
           grid-template-areas: "hero-bottom-left" "hero-top-right" "hero-bottom-right" "hero-cta";
           grid-template-columns: 1fr;
           text-align: center;
-          align-items: center;
+          gap: 20px;
         }
         .hero-text-top-right, .hero-stats-bottom-right { justify-self: center; text-align: center; align-items: center; }
-        .about-intro-container, .journey-container { grid-template-columns: 1fr; }
-        .about-intro-left { padding-left: 0; }
-        .skill-feature i { margin-left: 0; position: static; margin-bottom: 10px; }
-        .skill-feature { flex-direction: column; text-align: center; }
+        .about-intro-container, .journey-container, .project-item, .project-item.alt-layout { grid-template-columns: 1fr; text-align: center; }
+        .about-intro-left { padding-left: 0; display: flex; flex-direction: column; align-items: center; }
         .vertical-line { display: none; }
-        .project-item, .project-item.alt-layout { grid-template-columns: 1fr; }
-        .project-item.alt-layout .project-details { order: 2; }
-        .project-item.alt-layout .project-image-placeholder { order: 1; }
+        .skill-feature { flex-direction: column; }
+        .skill-feature i { margin-left: 0; position: static; margin-bottom: 10px; }
+        .about-intro-right h2, .journey-text h2 { text-align: center; }
+        .about-intro-right h2::after, .journey-text h2::after { margin-left: auto; margin-right: auto; }
+        .project-item.alt-layout .project-image-placeholder, .project-item.alt-layout .project-details { order: unset; }
+        .project-image-placeholder { height: 250px; margin-bottom: 20px; }
+        .project-buttons { justify-content: center; }
       }
 
       @media (max-width: 768px) {
@@ -539,13 +552,15 @@
         .hamburger-menu { display: block; }
         .hero { padding-top: 100px; height: auto; min-height: 100vh; }
         .journey-image-gallery { grid-template-columns: 1fr; }
-        .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; height: 250px; }
+        .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; min-height: 250px; }
       }
 
       @media (max-width: 480px) {
         :root { --section-padding: 60px 15px; }
+        .hero-text-bottom-left h1 { font-size: 2.2rem; }
         .project-buttons { flex-direction: column; }
-        .btn { width: 100%; justify-content: center; }
+        .btn { width: 100%; }
+        .stat-item { font-size: 0.85rem; }
       }
     </style>
 </head>
@@ -577,13 +592,14 @@
     </div>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-content">
                 <div class="hero-text-bottom-left animate-on-load fade-up-delay-1">
                     <h1>Hey, I'm <span class="highlight">Daniel</span><br>A frontend web developer</h1>
                 </div> 
-                 <div class="hero-text-top-right animate-on-load fade-up-delay-2">
-                    <p>I'm a web developer and designer with over 5 years experience helping brands stand out with professional websites.</p>
+                <div class="hero-text-top-right animate-on-load fade-up-delay-2">
+                    <p>I'm a web developer and designer with over 5 years experience and I help brands stand out with professional websites.</p>
                 </div>
                 <div class="hero-stats-bottom-right animate-on-load fade-up-delay-3">
                     <div class="stat-item"><i class="fas fa-briefcase"></i> 5+ Yrs Experience</div>
@@ -594,6 +610,7 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section class="about-intro scroll-animate" id="about">
             <div class="about-intro-container">
                 <div class="about-intro-left">
@@ -622,46 +639,49 @@
                 </div>
                 <div class="about-intro-right">
                     <h2>About Me</h2>
-                    <p>Hello! I'm Daniel, a passionate frontend developer dedicated to creating seamless digital experiences that are both functional and beautiful. With a strong eye for design, I specialize in integrating APIs and using Express.js for backend solutions with MongoDB. My goal is to exceed expectations, delivering solutions that drive growth and make a lasting impact.</p>
+                    <p>Hello! I'm Daniel, a passionate frontend developer dedicated to creating seamless digital experiences that are both functional and beautiful. When I wrote my first code in QBASIC 9 years ago, it completely changed how I saw programming. Since then, I’ve grown into a web developer with a strong eye for design, skilled in integrating APIs and using Express.js for backend solutions with MongoDB for handling databases. Outside of coding, I enjoy music, quality time, and sketching. My goal is to not just meet expectations, but to exceed them, delivering solutions that drive growth and make a lasting impact.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Proficiencies -->
         <section class="proficiencies scroll-animate" id="proficiencies">
             <h2>My Core <span class="highlight">Proficiencies</span></h2>
             <div class="proficiencies-grid">
-                <div class="proficiency-card"><i class="fab fa-html5"></i><h3>HTML5</h3><p>Semantic structure for SEO.</p></div>
-                <div class="proficiency-card"><i class="fab fa-css3-alt"></i><h3>CSS3</h3><p>Responsive styling.</p></div>
-                <div class="proficiency-card"><i class="fab fa-js-square"></i><h3>JavaScript</h3><p>Dynamic ES6+ features.</p></div>
-                <div class="proficiency-card"><i class="fab fa-react"></i><h3>React.js</h3><p>Component-based UI.</p></div>
-                <div class="proficiency-card"><i class="fab fa-node-js"></i><h3>Node.js</h3><p>Scalable server solutions.</p></div>
-                <div class="proficiency-card"><i class="fas fa-fire"></i><h3>Firebase</h3><p>Real-time data & auth.</p></div>
+                <div class="proficiency-card"><i class="fab fa-html5"></i><h3>HTML5</h3><p>Structuring web content semantically for accessibility and SEO.</p></div>
+                <div class="proficiency-card"><i class="fab fa-css3-alt"></i><h3>CSS3</h3><p>Styling modern, responsive layouts with advanced CSS techniques.</p></div>
+                <div class="proficiency-card"><i class="fab fa-js-square"></i><h3>JavaScript</h3><p>Building interactive and dynamic user experiences with ES6+.</p></div>
+                <div class="proficiency-card"><i class="fab fa-react"></i><h3>React.js</h3><p>Building complex, interactive UIs with component-based architecture.</p></div>
+                <div class="proficiency-card"><i class="fab fa-node-js"></i><h3>Node.js</h3><p>Developing scalable server-side applications and RESTful APIs.</p></div>
+                <div class="proficiency-card"><i class="fas fa-fire"></i><h3>Firebase</h3><p>Leveraging Firebase for backend services, auth, and real-time data.</p></div>
             </div>
         </section>
 
+        <!-- Journey Section -->
         <section class="journey scroll-animate" id="journey">
             <div class="journey-container">
                 <div class="journey-text">
                     <h2>My Journey as a <span class="highlight">Founder</span></h2>
                     <h3>MyEasySchool</h3>
                     <h4>An Edutech Platform for Gen Z</h4>
-                    <p>Founder of MyEasySchool, an edutech platform scaling through Nigerian universities with over <strong>3000+ users</strong>. We offer tutorial lessons, CBT quizzes, and study tools designed for the modern student.</p>
+                    <p>I'm the founder of MyEasySchool, an edutech platform I started 3 years ago in my dorm. Currently scaling through various universities in Nigeria with over <strong>3000+ users</strong>, MyEasySchool resonates with Gen Z by offering tutorial lessons, CBT quizzes, flashcards, solution manuals, and more to enhance their study experience.</p>
                     <div class="stack-tags">
-                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Paystack API</span><span>Express.js</span><span>Node.js</span>
-                    </div>
-                    <div class="project-buttons" style="margin-top:20px;">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Paystack API</span><span>Express.js</span><span>Node.js</span><span>Render</span>
+                    </div>                                            
+                    <div class="project-buttons" style="margin-top: 30px;">
                         <a href="https://myeasyschool.org/" class="btn btn-primary">View Site</a>
                     </div>
                 </div>
                 <div class="journey-image-gallery">
-                    <div class="gallery-item wide"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/ScreenShot%20Tool%20-20251203164922.png" alt="Dashboard"></div>
-                    <div class="gallery-item tall"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_c4affaa1.jpg" alt="Mobile"></div>
-                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_17f295b6.jpg" alt="Feature"></div>
-                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.44_df9e89ce.jpg" alt="App"></div>
+                    <div class="gallery-item wide"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/ScreenShot%20Tool%20-20251203164922.png" alt="MyEasySchool Dashboard"></div>
+                    <div class="gallery-item tall"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_c4affaa1.jpg" alt="MyEasySchool Mobile View"></div>
+                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_17f295b6.jpg" alt="MyEasySchool Feature"></div>
+                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.44_df9e89ce.jpg" alt="MyEasySchool Mobile App"></div>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Showcase -->
         <section class="projects-showcase scroll-animate" id="projects">
             <h2><span class="highlight">Projects</span> I've Worked On</h2>
             <div class="project-list">
@@ -669,27 +689,105 @@
                     <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-033900~2-KKUrwKMPeKqgxqdTLZosnaZqKUGYFQ.png?width=500&height=300" alt="SunRise"></div>
                     <div class="project-details">
                         <h3>SunRise Enterprise</h3>
-                        <p>A multi-purpose cooperative platform built with nature-inspired design and intuitive navigation.</p>
+                        <p>I built this multi-purpose cooperative platform to resonate with the brand's eco-friendly ethos. Using a nature-inspired color palette and intuitive navigation.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
                         <div class="project-buttons">
                             <a href="https://www.sunrisempcooperative.com" class="btn btn-primary">View Site</a>
                             <a href="https://github.com/Dannyblue12/SunRise-website" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
                 </article>
-                </div>
+
+                <article class="project-item alt-layout">
+                    <div class="project-details">
+                        <h3>Stream of Grace</h3>
+                        <p>Faith-based organization digital experience focusing on serene and uplifting tones. Harmonious and inspiring design that left the client stunned.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Youtube API</span></div>
+                        <div class="project-buttons">
+                            <a href="https://www.streamofgracechapel.org" class="btn btn-primary">View Site</a>
+                            <a href="https://github.com/Codex-247/Stream-of-Grace" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034347~2-za7DZj91N0SCU9mmEIMV7BncsxUO4D.png?width=500&height=300" alt="Stream of Grace"></div>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034027~2-GDpwC6CeGweyj0G87gK0T4lskizbNU.png?width=100%&height=300" alt="Mono Education"></div>
+                    <div class="project-details">
+                        <h3>Mono Education</h3>
+                        <p>Educational consulting website designed to be informative, trustworthy, and easy to navigate.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <div class="project-buttons">
+                            <a href="https://mono-education.vercel.app/" class="btn btn-primary">View Site</a>
+                            <a href="https://github.com/Dannyblue12/Mono-Education" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-item alt-layout">
+                    <div class="project-details">
+                        <h3>ChainGuild</h3>
+                        <p>Web3 platform designed to connect gamers and developers. Futuristic engaging UI/UX with tech-savvy elements.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <div class="project-buttons">
+                            <a href="https://chain-guild.vercel.app/" class="btn btn-primary">View Site</a>
+                            <a href="https://github.com/Dannyblue12/ChainGuild" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-051031~2-eUsBJmoOtXnDUHp06CIruQYBQhyHpw.png?width=500&height=300" alt="ChainGuild"></div>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250613-145441~2-Ga0CoRv46XRR8zIs1WzVV6VhNzc7Af.png?width=500&height=300" alt="Beauty Spa"></div>
+                    <div class="project-details">
+                        <h3>Beauty Spa Pitch Site</h3>
+                        <p>Calming vibe and tranquility design focusing on soft colors and elegant typography. A Mood-driven design exercise.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <div class="project-buttons">
+                            <a href="https://beauty-spa-flame.vercel.app/" class="btn btn-primary">View Site</a>
+                            <a href="https://github.com/Dannyblue12/Beauty-Spa" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-item alt-layout">
+                    <div class="project-details">
+                        <h3>Learn With Ease</h3>
+                        <p>Educational outreach program with impact. Clean minimalistic design clearly communicating core values.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <div class="project-buttons">
+                            <a href="https://learn-with-ease-three.vercel.app/" class="btn btn-primary">View Site</a>
+                            <a href="#" class="btn btn-outline" style="opacity:0.5; cursor:not-allowed;">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-image-placeholder"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2012.07.40_d42980c5.jpg" alt="Learn With Ease"></div>
+                </article>
+            </div>
         </section>
 
+        <!-- Contact Section -->
         <section class="connect-cta scroll-animate" id="contact">
             <div class="connect-content">
                 <h2>Connect With <span class="highlight">Me</span></h2>
-                <p>Let's build something outstanding together.</p>
-                <a href="https://wa.link/dm2pg6" class="btn btn-primary">Let's Talk <i class="fas fa-arrow-right" style="margin-left:10px;"></i></a>
+                <p>Let's build something memorable and outstanding together. I'm excited to hear about your ideas and collaborate on your next big project!</p>
+                <a href="https://wa.link/dm2pg6" class="btn btn-primary btn-large">Let's Talk <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
+            </div>
+        </section>
+
+        <!-- Socials -->
+        <section class="socials scroll-animate">
+            <h3>Find Me On</h3>
+            <div class="social-icons-container">
+                <a href="https://www.facebook.com/daniel.udo.1000" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Daniel14346962?t=CiXa3MsKYWx5QHes6X8NzQ&s=09" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Dannyblue12" aria-label="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </section>
     </main>
 
     <footer class="main-footer-bottom">
-        <p>&copy; <span id="currentYear"></span> Daniel. Crafted with <i class="fas fa-heart highlight"></i>.</p>
+        <p>&copy; <span id="currentYear"></span> Daniel. All rights reserved. Crafted with <i class="fas fa-heart highlight"></i>.</p>
     </footer>
 
     <script>
@@ -698,32 +796,46 @@
         const mobileNav = document.getElementById("mobileNav");
 
         hamburgerMenu.addEventListener("click", () => {
-          mobileNav.classList.toggle("open");
+          const isOpen = mobileNav.classList.toggle("open");
           const icon = hamburgerMenu.querySelector("i");
-          icon.classList.toggle("fa-bars");
-          icon.classList.toggle("fa-times");
-          document.body.style.overflow = mobileNav.classList.contains("open") ? "hidden" : "";
+          icon.className = isOpen ? "fas fa-times" : "fas fa-bars";
+          document.body.style.overflow = isOpen ? "hidden" : "";
         });
 
-        document.querySelectorAll('.mobile-nav a').forEach(link => {
-          link.addEventListener('click', () => {
+        document.querySelectorAll(".mobile-nav a").forEach(link => {
+          link.addEventListener("click", () => {
             mobileNav.classList.remove("open");
+            hamburgerMenu.querySelector("i").className = "fas fa-bars";
             document.body.style.overflow = "";
-            const icon = hamburgerMenu.querySelector("i");
-            icon.className = "fas fa-bars";
           });
         });
 
         document.getElementById("currentYear").textContent = new Date().getFullYear();
 
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener("click", function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              const headerH = document.querySelector(".main-header").offsetHeight;
+              window.scrollTo({ top: target.offsetTop - headerH, behavior: "smooth" });
+            }
+          });
+        });
+
+        // Animations
+        window.addEventListener("load", () => document.body.classList.add("loaded"));
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add("visible");
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.15 });
 
         document.querySelectorAll(".scroll-animate").forEach(el => observer.observe(el));
-        window.addEventListener("load", () => document.body.classList.add("loaded"));
       });
     </script>
 </body>
