@@ -37,6 +37,22 @@ state), the hero stat ticker, and the scroll-reveal observer. This keeps the
 page readable by crawlers and link-preview bots that do not execute
 JavaScript.
 
+## Deploying to Vercel
+
+The project ships a `vercel.json` pinning `framework: nextjs`, so a fresh
+import needs no configuration.
+
+If an existing Vercel project was created back when this repo was a static
+`index.html` site, its **Framework Preset** will still be "Other" and the
+deployment will 404 — Vercel skips the build and looks for an `index.html`
+that no longer exists. Fix it under Settings → Build and Deployment:
+
+- Framework Preset → **Next.js**
+- Clear any **Output Directory** override (it is not read from `vercel.json`)
+- Leave Build and Install commands on their defaults
+
+Then redeploy.
+
 ## Changing the domain
 
 Set `NEXT_PUBLIC_SITE_URL` in the Vercel project settings. Canonical tags,
