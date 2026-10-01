@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel — Fullstack Developer</title>
-    <meta name="description" content="Daniel — fullstack developer and designer with 5+ years of experience building professional websites and web apps that help brands stand out.">
+    <title>Daniel Victor Udo — Fullstack Developer</title>
+    <meta name="description" content="Daniel Victor Udo — mobile &amp; backend developer and product builder. I turn ideas into websites, mobile apps, backend systems and AI-powered products.">
     <meta name="theme-color" content="#0D0D0F">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,10 +16,9 @@
          DESIGN TOKENS
          Black tone sampled from the reference UI (neutral #202020
          family, no blue cast). Green ramp sampled from the
-         MyEasySchool brand green (#5DC53B → #42A82A → #278419).
+         MyEasySchool brand green (#5DC53B / #42A82A / #278419).
          ========================================================= */
       :root {
-        /* Brand green */
         --green-200: #C6F2B3;
         --green-300: #8FE06D;
         --green-400: #5DC53B;
@@ -28,7 +27,6 @@
         --green-700: #2E8F1C;
         --green-800: #278419;
 
-        /* Neutral black scale */
         --ink-1000: #060607;
         --ink-950: #0A0A0B;
         --ink-900: #0D0D0F;
@@ -38,7 +36,6 @@
         --ink-600: #242428;
         --ink-500: #2E2E33;
 
-        /* Lines & text */
         --line: rgba(255, 255, 255, 0.08);
         --line-soft: rgba(255, 255, 255, 0.05);
         --line-strong: rgba(255, 255, 255, 0.16);
@@ -55,6 +52,7 @@
         --r-xl: 32px;
         --section-pad: clamp(84px, 10vw, 136px) 24px;
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -77,9 +75,55 @@
 
       img { max-width: 100%; display: block; }
       a { text-decoration: none; color: inherit; }
+      ul { list-style: none; }
       ::selection { background: var(--green-500); color: #061003; }
 
       .highlight { color: var(--green-400); }
+
+      /* =========================================================
+         AMBIENT GREEN LIGHT
+         Soft drifting orbs that give the page its calm glow.
+         ========================================================= */
+      .ambient {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(80px);
+        background: radial-gradient(circle, rgba(76, 187, 46, 0.3) 0%, rgba(76, 187, 46, 0.1) 45%, rgba(76, 187, 46, 0) 72%);
+        will-change: transform, opacity;
+        animation: drift-a 24s var(--ease) infinite alternate;
+      }
+
+      .ambient--soft { background: radial-gradient(circle, rgba(76, 187, 46, 0.22) 0%, rgba(76, 187, 46, 0.08) 48%, rgba(76, 187, 46, 0) 74%); }
+      .ambient--strong { background: radial-gradient(circle, rgba(76, 187, 46, 0.4) 0%, rgba(76, 187, 46, 0.14) 44%, rgba(76, 187, 46, 0) 72%); }
+
+      .ambient--b { animation: drift-b 31s var(--ease) infinite alternate; }
+      .ambient--c { animation: drift-c 38s var(--ease) infinite alternate; }
+
+      @keyframes drift-a {
+        0%   { transform: translate3d(0, 0, 0) scale(1);    opacity: 0.85; }
+        50%  { transform: translate3d(3%, -5%, 0) scale(1.1); opacity: 1; }
+        100% { transform: translate3d(-4%, 3%, 0) scale(0.94); opacity: 0.7; }
+      }
+
+      @keyframes drift-b {
+        0%   { transform: translate3d(0, 0, 0) scale(1.04); opacity: 0.6; }
+        50%  { transform: translate3d(-5%, 4%, 0) scale(0.92); opacity: 0.95; }
+        100% { transform: translate3d(4%, -3%, 0) scale(1.12); opacity: 0.72; }
+      }
+
+      @keyframes drift-c {
+        0%   { transform: translate3d(-2%, 2%, 0) scale(0.96); opacity: 0.55; }
+        50%  { transform: translate3d(4%, -2%, 0) scale(1.06); opacity: 0.85; }
+        100% { transform: translate3d(-3%, -4%, 0) scale(1);  opacity: 0.6; }
+      }
+
+      /* Sections that host ambient light clip it without becoming
+         scroll containers, so position: sticky keeps working. */
+      .has-ambient { position: relative; overflow: clip; }
+      .has-ambient > *:not(.ambient) { position: relative; z-index: 1; }
+      .has-ambient > .ambient { position: absolute; z-index: 0; }
 
       /* =========================================================
          HEADER
@@ -94,7 +138,7 @@
         align-items: center;
         padding: 0 26px;
         border-bottom: 1px solid transparent;
-        transition: background-color 0.45s var(--ease), border-color 0.45s var(--ease), backdrop-filter 0.45s var(--ease);
+        transition: background-color 0.45s var(--ease), border-color 0.45s var(--ease);
       }
 
       .main-header.scrolled {
@@ -114,7 +158,6 @@
         gap: 24px;
       }
 
-      /* Brand */
       .logo { display: inline-flex; align-items: center; gap: 11px; }
 
       .logo-mark {
@@ -140,8 +183,7 @@
         color: var(--text);
       }
 
-      /* Nav */
-      .main-nav ul { list-style: none; display: flex; align-items: center; gap: 34px; }
+      .main-nav ul { display: flex; align-items: center; gap: 30px; }
 
       .main-nav a {
         position: relative;
@@ -205,7 +247,6 @@
 
       .hamburger-menu:hover { background: rgba(255, 255, 255, 0.1); }
 
-      /* Mobile nav */
       .mobile-nav {
         position: fixed;
         top: var(--header-h); left: 0;
@@ -216,7 +257,7 @@
         -webkit-backdrop-filter: blur(24px);
         backdrop-filter: blur(24px);
         border-bottom: 1px solid var(--line);
-        padding: 30px 26px 44px;
+        padding: 24px 26px 40px;
         z-index: 999;
         opacity: 0;
         visibility: hidden;
@@ -225,35 +266,33 @@
       }
 
       .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); }
-      .mobile-nav ul { list-style: none; display: flex; flex-direction: column; }
-
+      .mobile-nav ul { display: flex; flex-direction: column; }
       .mobile-nav li { border-bottom: 1px solid var(--line-soft); }
 
       .mobile-nav a {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 1.35rem;
+        font-size: 1.25rem;
         font-weight: 600;
         letter-spacing: -0.02em;
         color: var(--text);
-        padding: 18px 2px;
+        padding: 16px 2px;
         transition: color 0.3s var(--ease);
       }
 
-      .mobile-nav a span { font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.1em; }
+      .mobile-nav a span { font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.1em; }
       .mobile-nav a:hover, .mobile-nav a.active { color: var(--green-400); }
 
       .mobile-nav .mobile-cta {
         display: block;
-        margin-top: 28px;
+        margin-top: 26px;
         text-align: center;
         background: var(--green-500);
         color: #061003;
         font-weight: 700;
         padding: 16px;
         border-radius: 999px;
-        letter-spacing: 0.02em;
       }
 
       /* =========================================================
@@ -273,7 +312,6 @@
         overflow: hidden;
         isolation: isolate;
         background:
-          radial-gradient(95% 70% at 50% 108%, rgba(76, 187, 46, 0.18), transparent 62%),
           radial-gradient(60% 55% at 4% 4%, rgba(255, 255, 255, 0.055), transparent 72%),
           linear-gradient(180deg, #202023 0%, #171719 48%, #101012 100%);
         box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
@@ -287,7 +325,47 @@
         padding: 54px 46px 0 88px;
       }
 
-      /* Top-left status tag */
+      /* The hero's own ambient light pools along the bottom edge */
+      .hero-glow {
+        position: absolute;
+        left: 50%;
+        bottom: -60%;
+        width: min(150%, 1500px);
+        height: 88%;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(90px);
+        background: radial-gradient(ellipse at center, rgba(76, 187, 46, 0.26) 0%, rgba(76, 187, 46, 0.09) 44%, rgba(76, 187, 46, 0) 72%);
+        will-change: transform, opacity;
+        animation: hero-breathe 22s var(--ease) infinite alternate;
+      }
+
+      .hero-glow--b {
+        bottom: -48%;
+        width: min(90%, 900px);
+        height: 70%;
+        filter: blur(100px);
+        background: radial-gradient(ellipse at center, rgba(93, 197, 59, 0.16) 0%, rgba(93, 197, 59, 0) 68%);
+        animation: hero-breathe-b 29s var(--ease) infinite alternate;
+      }
+
+      @keyframes glow-in   { from { opacity: 0; } to { opacity: 0.8; } }
+      @keyframes glow-in-b { from { opacity: 0; } to { opacity: 0.55; } }
+
+      @keyframes hero-breathe {
+        0%   { transform: translateX(-50%) translateY(0) scale(1);       opacity: 0.8; }
+        50%  { transform: translateX(-52%) translateY(-3%) scale(1.07);  opacity: 1; }
+        100% { transform: translateX(-47%) translateY(2%) scale(0.95);   opacity: 0.72; }
+      }
+
+      @keyframes hero-breathe-b {
+        0%   { transform: translateX(-46%) translateY(2%) scale(1.05); opacity: 0.55; }
+        50%  { transform: translateX(-54%) translateY(-4%) scale(0.9); opacity: 0.9; }
+        100% { transform: translateX(-50%) translateY(0) scale(1.1);   opacity: 0.6; }
+      }
+
       .hero-tag {
         position: absolute;
         top: 75px; left: 88px;
@@ -308,9 +386,14 @@
         background: var(--green-400);
         box-shadow: 0 0 0 4px rgba(76, 187, 46, 0.16);
         font-style: normal;
+        animation: pulse-dot 3.4s var(--ease) infinite;
       }
 
-      /* Vertical rail label */
+      @keyframes pulse-dot {
+        0%, 100% { box-shadow: 0 0 0 4px rgba(76, 187, 46, 0.16); }
+        50%      { box-shadow: 0 0 0 8px rgba(76, 187, 46, 0.04); }
+      }
+
       .hero-rail {
         position: absolute;
         left: 30px; top: 50%;
@@ -333,7 +416,6 @@
         background: linear-gradient(to bottom, var(--green-500), transparent);
       }
 
-      /* Left column */
       .hero-lead {
         grid-area: hl;
         align-self: center;
@@ -351,9 +433,25 @@
         color: var(--text);
       }
 
-      .hero-lead h1 .dot { color: var(--green-400); }
+      /* Cinematic line-by-line mask reveal */
+      .reveal-line {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.14em;
+        margin-bottom: -0.14em;
+      }
 
-      .hero-lead h1 .line-2 { display: block; }
+      .reveal-line > span {
+        display: block;
+        transform: translateY(112%);
+        transition: transform 1.15s var(--ease-out);
+      }
+
+      body.loaded .reveal-line > span { transform: translateY(0); }
+      body.loaded .reveal-line:nth-child(1) > span { transition-delay: 0.42s; }
+      body.loaded .reveal-line:nth-child(2) > span { transition-delay: 0.54s; }
+
+      .hero-lead h1 .dot { color: var(--green-400); font-style: normal; }
 
       .hero-badge {
         display: inline-flex;
@@ -366,13 +464,12 @@
         background: rgba(255, 255, 255, 0.035);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
-        transition: all 0.35s var(--ease);
+        transition: border-color 0.35s var(--ease), background-color 0.35s var(--ease);
       }
 
       .hero-badge:hover {
         border-color: rgba(93, 197, 59, 0.45);
         background: rgba(76, 187, 46, 0.08);
-        transform: translateY(-2px);
       }
 
       .badge-icon {
@@ -400,7 +497,6 @@
 
       .badge-text strong { display: block; color: var(--text); font-weight: 700; }
 
-      /* Centre figure */
       .hero-figure {
         grid-area: figure;
         position: relative;
@@ -433,7 +529,6 @@
         pointer-events: none;
       }
 
-      /* Right column */
       .hero-aside {
         grid-area: hr;
         display: flex;
@@ -494,7 +589,6 @@
 
       .hero-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 
-      /* Bottom bar — stat ticker */
       .hero-bar {
         grid-area: bar;
         display: flex;
@@ -521,13 +615,7 @@
 
       .circle-btn:hover { background: var(--green-500); border-color: var(--green-500); color: #061003; }
 
-      .ticker {
-        position: relative;
-        height: 46px;
-        min-width: 210px;
-        flex: 1;
-        overflow: hidden;
-      }
+      .ticker { position: relative; height: 46px; min-width: 210px; flex: 1; overflow: hidden; }
 
       .ticker-item {
         position: absolute;
@@ -558,10 +646,9 @@
         text-transform: uppercase;
         color: var(--text-3);
         line-height: 1.4;
-        max-width: 130px;
+        max-width: 140px;
       }
 
-      /* Scroll cue */
       .hero-cue {
         grid-area: cue;
         display: flex;
@@ -579,7 +666,6 @@
       }
 
       .hero-cue:hover { color: var(--text); }
-
       .hero-cue i { animation: cue-bob 2.2s var(--ease) infinite; }
 
       @keyframes cue-bob {
@@ -587,19 +673,46 @@
         50% { transform: translateY(5px); }
       }
 
-      /* Hero load animation */
+      /* ---- Hero load choreography ---- */
+      .js .hero-stage {
+        opacity: 0;
+        transform: scale(1.018);
+        transition: opacity 1.1s var(--ease-out), transform 1.4s var(--ease-out);
+      }
+
+      body.loaded .hero-stage { opacity: 1; transform: scale(1); }
+
       .js .animate-on-load {
         opacity: 0;
-        transform: translateY(26px);
-        transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+        transform: translateY(24px);
+        transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
       }
 
       body.loaded .animate-on-load { opacity: 1; transform: translateY(0); }
-      body.loaded .fade-up-delay-1 { transition-delay: 0.1s; }
-      body.loaded .fade-up-delay-2 { transition-delay: 0.22s; }
-      body.loaded .fade-up-delay-3 { transition-delay: 0.34s; }
-      body.loaded .fade-up-delay-4 { transition-delay: 0.46s; }
-      body.loaded .fade-up-delay-5 { transition-delay: 0.58s; }
+      body.loaded .fade-up-delay-1 { transition-delay: 0.30s; }
+      body.loaded .fade-up-delay-2 { transition-delay: 0.68s; }
+      body.loaded .fade-up-delay-3 { transition-delay: 0.46s; }
+      body.loaded .fade-up-delay-4 { transition-delay: 0.80s; }
+      body.loaded .fade-up-delay-5 { transition-delay: 0.94s; }
+
+      .js .hero-figure { opacity: 0; transform: translateY(42px) scale(0.985); transition: opacity 1.4s var(--ease-out), transform 1.4s var(--ease-out); }
+      body.loaded .hero-figure { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0.34s; }
+
+      .js .hero-halo { opacity: 0; transform: translateX(-50%) scale(0.72); transition: opacity 1.3s var(--ease-out), transform 1.5s var(--ease-out); }
+      body.loaded .hero-halo { opacity: 1; transform: translateX(-50%) scale(1); transition-delay: 0.58s; }
+
+      .js .hero-glow { opacity: 0; animation: none; }
+      body.loaded .hero-glow {
+        animation: glow-in 1.7s var(--ease-out) 0.55s both,
+                   hero-breathe 22s var(--ease) 2.25s infinite alternate;
+      }
+      body.loaded .hero-glow--b {
+        animation: glow-in-b 1.7s var(--ease-out) 0.7s both,
+                   hero-breathe-b 29s var(--ease) 2.4s infinite alternate;
+      }
+
+      .js .main-header { opacity: 0; transform: translateY(-14px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out), background-color 0.45s var(--ease), border-color 0.45s var(--ease); }
+      body.loaded .main-header { opacity: 1; transform: translateY(0); }
 
       /* =========================================================
          BUTTONS
@@ -630,7 +743,6 @@
       }
 
       .btn-outline { color: var(--text); border-color: var(--line-strong); background: transparent; }
-
       .btn-outline:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.28); transform: translateY(-2px); }
 
       .btn-link {
@@ -646,7 +758,6 @@
       }
 
       .btn-link:hover { color: var(--green-400); gap: 14px; }
-
       .btn-large { padding: 17px 42px; font-size: 0.95rem; }
 
       /* =========================================================
@@ -659,6 +770,9 @@
         width: 100%;
       }
 
+      .section-wide { max-width: 100%; }
+      .section-inner { max-width: 1320px; margin: 0 auto; width: 100%; }
+
       .section-head { max-width: 760px; margin-bottom: clamp(48px, 6vw, 74px); }
       .section-head.centered { margin-left: auto; margin-right: auto; text-align: center; }
 
@@ -670,7 +784,7 @@
         font-weight: 600;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: var(--text-3);
+        color: var(--green-400);
         margin-bottom: 18px;
       }
 
@@ -697,20 +811,19 @@
         line-height: 1.75;
       }
 
-      .js .scroll-animate {
-        opacity: 0;
-        transform: translateY(34px);
-        transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-      }
-
+      /* ---- Scroll reveal ---- */
+      .js .scroll-animate { opacity: 0; transform: translateY(34px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
       .js .scroll-animate.visible { opacity: 1; transform: translateY(0); }
+
+      .js [data-reveal] > * { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+      .js [data-reveal].in > * { opacity: 1; transform: translateY(0); }
 
       /* =========================================================
          ABOUT
          ========================================================= */
       .about-intro-container {
         display: grid;
-        grid-template-columns: 0.85fr 1.15fr;
+        grid-template-columns: 0.8fr 1.2fr;
         gap: clamp(40px, 6vw, 80px);
         align-items: start;
       }
@@ -745,94 +858,246 @@
       .skill-feature h4 { font-size: 1rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 3px; }
       .skill-feature p { color: var(--text-2); font-size: 0.9rem; line-height: 1.65; }
 
+      .about-intro-right .section-head { margin-bottom: 28px; max-width: none; }
       .about-intro-right p { color: var(--text-2); font-size: 1.02rem; line-height: 1.8; }
       .about-intro-right p + p { margin-top: 18px; }
-      .about-intro-right .section-head { margin-bottom: 26px; }
+
+      .about-closer {
+        margin-top: 34px;
+        padding: 22px 26px;
+        border-left: 2px solid var(--green-500);
+        background: linear-gradient(90deg, rgba(76, 187, 46, 0.07), transparent 70%);
+        border-radius: 0 var(--r-md) var(--r-md) 0;
+      }
+
+      .about-closer p { color: var(--text); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.02em; }
 
       /* =========================================================
-         PROFICIENCIES
+         TECH STACK
          ========================================================= */
-      .proficiencies { background-color: var(--ink-900); max-width: 100%; border-block: 1px solid var(--line-soft); }
-      .proficiencies-inner { max-width: 1320px; margin: 0 auto; }
+      .stack { background-color: var(--ink-900); border-block: 1px solid var(--line-soft); }
 
-      .proficiencies-grid {
+      .stack-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 18px;
       }
 
-      .proficiency-card {
+      .stack-group {
         background-color: var(--ink-850);
-        padding: 34px 30px 32px;
-        border-radius: var(--r-lg);
         border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        padding: 30px 26px;
+        transition: transform 0.45s var(--ease), border-color 0.45s var(--ease);
+      }
+
+      .stack-group:hover { transform: translateY(-5px); border-color: rgba(93, 197, 59, 0.3); }
+
+      .stack-group h3 {
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .stack-group li {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text);
+        padding: 8px 0;
+      }
+
+      .stack-group li i {
+        font-size: 0.82rem;
+        color: var(--green-400);
+        width: 30px; height: 30px;
+        min-width: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 9px;
+        background: rgba(76, 187, 46, 0.1);
+        border: 1px solid rgba(76, 187, 46, 0.18);
+      }
+
+      /* =========================================================
+         SERVICES
+         ========================================================= */
+      .services-layout {
+        display: grid;
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: clamp(40px, 5vw, 72px);
+        align-items: start;
+      }
+
+      .services-head { position: sticky; top: calc(var(--header-h) + 40px); }
+      .services-head .section-head { margin-bottom: 0; }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .service-card {
+        background-color: var(--ink-850);
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        padding: 28px 26px 30px;
         transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), background-color 0.45s var(--ease);
       }
 
-      .proficiency-card:hover {
+      .services-grid > .service-card:nth-child(even) { margin-top: 54px; }
+
+      .service-card:hover {
         transform: translateY(-6px);
-        border-color: rgba(93, 197, 59, 0.35);
+        border-color: rgba(93, 197, 59, 0.34);
         background-color: var(--ink-800);
       }
 
-      .proficiency-card i {
-        font-size: 1.15rem;
-        color: var(--green-400);
-        width: 48px; height: 48px;
+      .service-icon {
+        width: 46px; height: 46px;
+        border-radius: 14px;
         display: grid;
         place-items: center;
-        border-radius: 14px;
+        font-size: 1.02rem;
+        color: var(--green-400);
         background: rgba(76, 187, 46, 0.1);
         border: 1px solid rgba(76, 187, 46, 0.2);
         margin-bottom: 22px;
+        transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
       }
 
-      .proficiency-card h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
-      .proficiency-card p { color: var(--text-2); font-size: 0.89rem; line-height: 1.7; }
+      .service-card:hover .service-icon { background: var(--green-500); color: #061003; }
+
+      .service-index {
+        display: block;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        margin-bottom: 9px;
+      }
+
+      .service-card h3 {
+        font-size: 1.14rem;
+        font-weight: 700;
+        letter-spacing: -0.028em;
+        color: var(--text);
+        margin-bottom: 10px;
+        line-height: 1.25;
+      }
+
+      .service-card p { color: var(--text-2); font-size: 0.9rem; line-height: 1.7; }
 
       /* =========================================================
-         JOURNEY
+         PROCESS
          ========================================================= */
-      .journey-container {
+      .process { background-color: var(--ink-900); border-block: 1px solid var(--line-soft); }
+
+      .process-grid {
         display: grid;
-        grid-template-columns: 1fr 1.05fr;
-        gap: clamp(40px, 5vw, 64px);
-        align-items: center;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        position: relative;
       }
 
-      .journey-text h3 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
-      .journey-text h4 { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-400); margin-bottom: 20px; }
-      .journey-text p { color: var(--text-2); font-size: 1rem; line-height: 1.8; }
-      .journey-text .section-head { margin-bottom: 30px; }
+      .process-step {
+        display: flex;
+        flex-direction: column;
+        padding: 0 26px;
+        border-left: 1px solid var(--line);
+      }
+      .process-grid > .process-step:first-child { border-left: 0; padding-left: 0; }
+      .process-grid > .process-step:last-child { padding-right: 0; }
 
-      .stack-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+      .process-marker {
+        position: relative;
+        width: 54px; height: 54px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-size: 1.05rem;
+        color: var(--green-400);
+        background: var(--ink-850);
+        border: 1px solid rgba(76, 187, 46, 0.24);
+        margin-bottom: 24px;
+        transition: background-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+      }
 
-      .stack-tags span {
-        background-color: rgba(255, 255, 255, 0.04);
+      .process-step:hover .process-marker { background: var(--green-500); color: #061003; transform: translateY(-3px); }
+
+      /* Dashed connector between the step markers */
+      .process-marker::after {
+        content: "";
+        position: absolute;
+        left: calc(100% + 1px);
+        top: 50%;
+        width: 100vw;
+        height: 1px;
+        background-image: linear-gradient(to right, var(--line-strong) 0 6px, transparent 6px 14px);
+        background-size: 14px 1px;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .process-grid > .process-step:last-child .process-marker::after { display: none; }
+
+      .process-index {
+        display: block;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green-400);
+        margin-bottom: 8px;
+      }
+
+      .process-step h3 {
+        font-size: 1.14rem;
+        font-weight: 700;
+        letter-spacing: -0.028em;
+        line-height: 1.25;
+        color: var(--text);
+        margin-bottom: 20px;
+      }
+
+      .process-list { margin-bottom: 22px; }
+
+      .process-list li {
+        position: relative;
+        padding-left: 18px;
+        font-size: 0.86rem;
+        line-height: 1.55;
         color: var(--text-2);
-        padding: 7px 14px;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        border: 1px solid var(--line);
-        transition: all 0.3s var(--ease);
+        margin-bottom: 9px;
       }
 
-      .stack-tags span:hover { color: var(--green-400); border-color: rgba(76, 187, 46, 0.4); }
-
-      .journey-image-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-
-      .gallery-item {
-        background-color: var(--ink-850);
-        border-radius: var(--r-md);
-        overflow: hidden;
-        border: 1px solid var(--line);
-        aspect-ratio: 9 / 16;
+      .process-list li::before {
+        content: "";
+        position: absolute;
+        left: 0; top: 0.6em;
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--green-600);
       }
 
-      .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
-      .gallery-item:hover img { transform: scale(1.05); }
-      .gallery-item.wide { grid-column: span 3; aspect-ratio: 16 / 9; }
+      .process-note {
+        margin-top: auto;
+        font-size: 0.84rem;
+        line-height: 1.65;
+        color: var(--text-3);
+        padding-top: 18px;
+        border-top: 1px solid var(--line-soft);
+      }
 
       /* =========================================================
          PROJECTS
@@ -875,6 +1140,22 @@
         display: block;
       }
 
+      .project-flag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green-400);
+        background: rgba(76, 187, 46, 0.1);
+        border: 1px solid rgba(76, 187, 46, 0.22);
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+
       .project-details h3 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); font-weight: 700; letter-spacing: -0.035em; color: var(--text); margin-bottom: 14px; }
       .project-details p { color: var(--text-2); font-size: 0.98rem; line-height: 1.8; margin-bottom: 22px; }
 
@@ -898,17 +1179,18 @@
       .connect-cta { max-width: 100%; padding-inline: 24px; }
 
       .connect-content {
+        position: relative;
+        overflow: clip;
         max-width: 1320px;
         margin: 0 auto;
         text-align: center;
         border-radius: var(--r-xl);
         border: 1px solid var(--line);
         padding: clamp(60px, 8vw, 104px) 28px;
-        background:
-          radial-gradient(70% 90% at 50% 108%, rgba(76, 187, 46, 0.2), transparent 62%),
-          linear-gradient(180deg, #1B1B1E 0%, #121214 100%);
+        background: linear-gradient(180deg, #1B1B1E 0%, #121214 100%);
       }
 
+      .connect-content > *:not(.ambient) { position: relative; z-index: 1; }
       .connect-content h2 { max-width: 680px; margin: 0 auto; }
       .connect-content p { color: var(--text-2); font-size: 1.05rem; line-height: 1.8; margin: 20px auto 36px; max-width: 580px; }
 
@@ -916,7 +1198,6 @@
          SOCIALS + FOOTER
          ========================================================= */
       .socials { text-align: center; padding-block: clamp(70px, 8vw, 110px); }
-
       .socials h3 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-3); }
 
       .social-icons-container { display: flex; justify-content: center; gap: 14px; margin-top: 26px; }
@@ -933,11 +1214,7 @@
         transition: all 0.35s var(--ease);
       }
 
-      .social-icons-container a:hover {
-        color: var(--green-400);
-        border-color: rgba(76, 187, 46, 0.4);
-        transform: translateY(-4px);
-      }
+      .social-icons-container a:hover { color: var(--green-400); border-color: rgba(76, 187, 46, 0.4); transform: translateY(-4px); }
 
       .main-footer-bottom {
         text-align: center;
@@ -951,11 +1228,19 @@
       /* =========================================================
          RESPONSIVE
          ========================================================= */
+      @media (max-width: 1280px) {
+        .process-grid { grid-template-columns: repeat(3, 1fr); row-gap: 54px; }
+        .process-grid > .process-step { border-left: 1px solid var(--line); padding: 0 26px; }
+        .process-grid > .process-step:nth-child(3n+1) { border-left: 0; padding-left: 0; }
+        .process-marker::after { display: none; }
+      }
+
       @media (max-width: 1240px) {
         .hero-stage { padding: 46px 30px 0 74px; column-gap: 22px; }
         .hero-aside { padding-bottom: 84px; }
         .hero-rail { left: 22px; }
         .hero-tag { top: 66px; left: 74px; }
+        .stack-grid { grid-template-columns: repeat(2, 1fr); }
       }
 
       @media (max-width: 1024px) {
@@ -987,11 +1272,19 @@
         .hero-bar { justify-content: center; padding-bottom: 40px; }
         .ticker { flex: 0 1 auto; text-align: left; }
         .hero-cue { display: none; }
+        .hero-glow { bottom: -44%; height: 70%; }
 
-        .proficiencies-grid { grid-template-columns: repeat(2, 1fr); }
-        .about-intro-container, .journey-container, .project-item, .project-item.alt-layout { grid-template-columns: 1fr; }
-        .journey-container { gap: 44px; }
+        .about-intro-container { grid-template-columns: 1fr; }
+        .services-layout { grid-template-columns: 1fr; }
+        .services-head { position: static; }
+        .project-item, .project-item.alt-layout { grid-template-columns: 1fr; }
         .project-item.alt-layout .project-image-placeholder { order: -1; }
+      }
+
+      @media (max-width: 860px) {
+        .process-grid { grid-template-columns: repeat(2, 1fr); }
+        .process-grid > .process-step { border-left: 1px solid var(--line); padding: 0 26px; }
+        .process-grid > .process-step:nth-child(2n+1) { border-left: 0; padding-left: 0; }
       }
 
       @media (max-width: 640px) {
@@ -1001,11 +1294,23 @@
         .hero-stage { border-radius: 26px; padding: 40px 20px 0; }
         .hero-figure { max-width: 310px; }
         .hero-badge { padding-right: 18px; }
-        .proficiencies-grid { grid-template-columns: 1fr; }
-        .journey-image-gallery { gap: 8px; }
+
+        .stack-grid { grid-template-columns: 1fr; }
+        .services-grid { grid-template-columns: 1fr; }
+        .services-grid > .service-card:nth-child(even) { margin-top: 0; }
+
+        .process-grid { grid-template-columns: 1fr; row-gap: 0; }
+        .process-grid > .process-step {
+          border-left: 0;
+          padding: 34px 0;
+          border-top: 1px solid var(--line);
+        }
+        .process-grid > .process-step:first-child { border-top: 0; padding-top: 0; }
+
         .project-details h3 { font-size: 1.5rem; }
         .social-icons-container { gap: 10px; }
         .social-icons-container a { width: 46px; height: 46px; }
+        .ambient { filter: blur(60px); }
       }
 
       @media (max-width: 420px) {
@@ -1017,7 +1322,16 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .js .reveal-line > span { transform: none; }
+        .js .hero-stage, .js .hero-figure, .js .hero-halo, .js .animate-on-load,
+        .js .scroll-animate, .js [data-reveal] > * { opacity: 1; transform: none; }
+        .js .hero-glow { opacity: 0.8; }
       }
     </style>
 </head>
@@ -1032,8 +1346,9 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#journey">Journey</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#projects">Work</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -1049,9 +1364,10 @@
         <ul>
             <li><a href="#home">Home <span>01</span></a></li>
             <li><a href="#about">About <span>02</span></a></li>
-            <li><a href="#journey">Journey <span>03</span></a></li>
-            <li><a href="#projects">Projects <span>04</span></a></li>
-            <li><a href="#contact">Contact <span>05</span></a></li>
+            <li><a href="#services">Services <span>03</span></a></li>
+            <li><a href="#process">Process <span>04</span></a></li>
+            <li><a href="#projects">Projects <span>05</span></a></li>
+            <li><a href="#contact">Contact <span>06</span></a></li>
         </ul>
         <a href="https://wa.link/dm2pg6" class="mobile-cta">Let's Talk</a>
     </div>
@@ -1060,13 +1376,16 @@
         <!-- ============ HERO ============ -->
         <section class="hero" id="home">
             <div class="hero-stage">
-                <span class="hero-tag animate-on-load fade-up-delay-1"><em></em>Web Developer &amp; Designer</span>
+                <span class="hero-glow" aria-hidden="true"></span>
+                <span class="hero-glow hero-glow--b" aria-hidden="true"></span>
+
+                <span class="hero-tag animate-on-load fade-up-delay-1"><em></em>Mobile &amp; Backend Developer</span>
                 <span class="hero-rail animate-on-load fade-up-delay-1">Daniel &mdash; Portfolio</span>
 
                 <div class="hero-lead">
-                    <h1 class="animate-on-load fade-up-delay-1">
-                        Fullstack
-                        <span class="line-2">Developer<span class="dot">.</span></span>
+                    <h1>
+                        <span class="reveal-line"><span>Fullstack</span></span>
+                        <span class="reveal-line"><span>Developer<i class="dot">.</i></span></span>
                     </h1>
                     <a href="#contact" class="hero-badge animate-on-load fade-up-delay-2">
                         <span class="badge-icon"><i class="fas fa-arrow-right"></i></span>
@@ -1074,11 +1393,11 @@
                     </a>
                 </div>
 
-                <div class="hero-figure animate-on-load fade-up-delay-3">
+                <div class="hero-figure">
                     <span class="hero-halo" aria-hidden="true"></span>
                     <img class="hero-portrait"
                          src="a_clean_cutout_isolated_portrait_on_a_transparent.png"
-                         alt="Portrait of Daniel, fullstack developer"
+                         alt="Portrait of Daniel Victor Udo, fullstack developer"
                          width="1122" height="1402" fetchpriority="high" decoding="async">
                 </div>
 
@@ -1088,8 +1407,8 @@
                         <strong>5+ Yrs</strong>
                     </div>
                     <div class="hero-pitch animate-on-load fade-up-delay-4">
-                        <h2>Professional websites for brands that want to stand out</h2>
-                        <p>I'm a web developer and designer with over 5 years of experience &mdash; building interfaces with React, and the APIs behind them with Node, Express and MongoDB. Founder of MyEasySchool, now serving 3,000+ students.</p>
+                        <h2>I turn ideas into digital products people can actually use</h2>
+                        <p>I help businesses and founders turn ideas into websites, mobile apps, backend systems and AI-powered products that solve real problems and create better experiences for their users.</p>
                         <div class="hero-actions">
                             <a href="https://wa.link/dm2pg6" class="btn btn-primary">Let's Connect</a>
                             <a href="#projects" class="btn-link">View Work <i class="fas fa-arrow-right"></i></a>
@@ -1105,7 +1424,7 @@
                     <div class="ticker" id="ticker">
                         <div class="ticker-item is-on"><strong>5+</strong><span>Years of experience</span></div>
                         <div class="ticker-item"><strong>6+</strong><span>Happy clients</span></div>
-                        <div class="ticker-item"><strong>7+</strong><span>Projects shipped</span></div>
+                        <div class="ticker-item"><strong>7+</strong><span>Products shipped</span></div>
                         <div class="ticker-item"><strong>3000+</strong><span>Students reached</span></div>
                     </div>
                 </div>
@@ -1115,99 +1434,281 @@
         </section>
 
         <!-- ============ ABOUT ============ -->
-        <section class="about-intro scroll-animate" id="about">
+        <section class="about-intro scroll-animate has-ambient" id="about">
+            <span class="ambient ambient--soft" aria-hidden="true" style="width:620px;height:620px;left:-14%;top:4%;"></span>
             <div class="about-intro-container">
                 <div class="about-intro-left">
                     <div class="vertical-line"></div>
                     <div class="skill-feature">
-                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-mobile-screen-button"></i>
                         <div>
-                            <h4>Web Design</h4>
-                            <p>Crafting visually appealing and user-centric interfaces.</p>
+                            <h4>Mobile Apps</h4>
+                            <p>Cross-platform iOS and Android products built with React Native and Expo.</p>
                         </div>
                     </div>
                     <div class="skill-feature">
-                        <i class="fas fa-cogs"></i>
+                        <i class="fas fa-server"></i>
                         <div>
-                            <h4>APIs</h4>
-                            <p>Integrating and developing robust API solutions.</p>
+                            <h4>Backend &amp; APIs</h4>
+                            <p>Scalable APIs, authentication, databases and the systems that power a product.</p>
                         </div>
                     </div>
                     <div class="skill-feature">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-wand-magic-sparkles"></i>
                         <div>
-                            <h4>Web Apps</h4>
-                            <p>Building dynamic and responsive web applications.</p>
+                            <h4>AI-Powered Products</h4>
+                            <p>Practical AI features that automate workflows and make experiences smarter.</p>
                         </div>
                     </div>
                 </div>
                 <div class="about-intro-right">
                     <div class="section-head">
                         <p class="eyebrow">About Me</p>
-                        <h2>Design that looks right.<br>Code that <span class="highlight">holds up</span>.</h2>
+                        <h2>I turn ideas into digital products people can <span class="highlight">actually use</span>.</h2>
                     </div>
-                    <p>Hello! I'm Daniel, a passionate developer dedicated to creating seamless digital experiences that are both functional and beautiful. When I wrote my first code in QBASIC 9 years ago, it completely changed how I saw programming.</p>
-                    <p>Since then, I've grown into a web developer with a strong eye for design, skilled in integrating APIs and using Express.js for backend solutions with MongoDB for handling databases. Outside of coding, I enjoy music, quality time, and sketching. My goal is to not just meet expectations, but to exceed them, delivering solutions that drive growth and make a lasting impact.</p>
+                    <p>I'm Daniel Victor Udo, a mobile &amp; backend developer and product builder. I help businesses and founders turn ideas into websites, mobile apps, backend systems, and AI-powered products that solve real problems and create better experiences for their users.</p>
+                    <p>I work across the product — from design and development to APIs, integrations, AI, payments, and deployment — so you can move from an idea to a working product without having to piece everything together.</p>
+                    <p>I've built and shipped products including MyEasySchool and ScholarGen, giving me hands-on experience taking products from concept to production and continuously improving them based on real users.</p>
+                    <div class="about-closer">
+                        <p>You bring the idea. I help turn it into something real.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ PROFICIENCIES ============ -->
-        <section class="proficiencies scroll-animate" id="proficiencies">
-            <div class="proficiencies-inner">
+        <!-- ============ TECH STACK ============ -->
+        <section class="stack section-wide scroll-animate has-ambient" id="stack">
+            <span class="ambient ambient--soft ambient--c" aria-hidden="true" style="width:560px;height:560px;right:-10%;bottom:-12%;"></span>
+            <div class="section-inner">
                 <div class="section-head centered">
-                    <p class="eyebrow">Capabilities</p>
-                    <h2>My core <span class="highlight">proficiencies</span></h2>
+                    <p class="eyebrow">Tech Stack</p>
+                    <h2>The tools I <span class="highlight">build with</span>.</h2>
                 </div>
-                <div class="proficiencies-grid">
-                    <div class="proficiency-card"><i class="fab fa-html5"></i><h3>HTML5</h3><p>Structuring web content semantically for accessibility and SEO.</p></div>
-                    <div class="proficiency-card"><i class="fab fa-css3-alt"></i><h3>CSS3</h3><p>Styling modern, responsive layouts with advanced CSS techniques.</p></div>
-                    <div class="proficiency-card"><i class="fab fa-js-square"></i><h3>JavaScript</h3><p>Building interactive and dynamic user experiences with ES6+.</p></div>
-                    <div class="proficiency-card"><i class="fab fa-react"></i><h3>React.js</h3><p>Building complex, interactive UIs with component-based architecture.</p></div>
-                    <div class="proficiency-card"><i class="fab fa-node-js"></i><h3>Node.js</h3><p>Developing scalable server-side applications and RESTful APIs.</p></div>
-                    <div class="proficiency-card"><i class="fas fa-fire"></i><h3>Firebase</h3><p>Leveraging Firebase for backend services, auth, and real-time data.</p></div>
+                <div class="stack-grid" data-reveal>
+                    <div class="stack-group">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li><i class="fab fa-js"></i>JavaScript</li>
+                            <li><i class="fab fa-react"></i>React</li>
+                            <li><i class="fas fa-cube"></i>Next.js</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Mobile</h3>
+                        <ul>
+                            <li><i class="fab fa-react"></i>React Native</li>
+                            <li><i class="fas fa-gem"></i>Expo</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Backend</h3>
+                        <ul>
+                            <li><i class="fab fa-node-js"></i>Node.js</li>
+                            <li><i class="fas fa-route"></i>Express.js</li>
+                            <li><i class="fas fa-database"></i>MongoDB</li>
+                            <li><i class="fas fa-plug"></i>REST APIs</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Platform &amp; Tools</h3>
+                        <ul>
+                            <li><i class="fas fa-fire"></i>Firebase</li>
+                            <li><i class="fab fa-git-alt"></i>Git</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ JOURNEY ============ -->
-        <section class="journey scroll-animate" id="journey">
-            <div class="journey-container">
-                <div class="journey-text">
+        <!-- ============ SERVICES ============ -->
+        <section class="services scroll-animate has-ambient" id="services">
+            <span class="ambient" aria-hidden="true" style="width:520px;height:520px;left:-12%;top:18%;"></span>
+            <div class="services-layout">
+                <div class="services-head">
                     <div class="section-head">
-                        <p class="eyebrow">The Journey</p>
-                        <h2>My journey as a <span class="highlight">founder</span></h2>
-                    </div>
-                    <h3>MyEasySchool</h3>
-                    <h4>An Edutech Platform for Gen Z</h4>
-                    <p>I'm the founder of MyEasySchool, an edutech platform I started 3 years ago in my dorm. Currently scaling through various universities in Nigeria with over <strong>3000+ users</strong>, MyEasySchool resonates with Gen Z by offering tutorial lessons, CBT quizzes, flashcards, solution manuals, and more to enhance their study experience.</p>
-                    <div class="stack-tags">
-                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Paystack API</span><span>Express.js</span><span>Node.js</span><span>Render</span>
-                    </div>
-                    <div class="project-buttons" style="margin-top: 32px;">
-                        <a href="https://myeasyschool.org/" class="btn btn-primary">View Site</a>
+                        <p class="eyebrow">Services</p>
+                        <h2>What I <span class="highlight">Provide</span></h2>
+                        <p>Clear services. One connected system — from the first idea to a product running in production.</p>
                     </div>
                 </div>
-                <div class="journey-image-gallery">
-                    <div class="gallery-item wide"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/ScreenShot%20Tool%20-20251203164922.png" alt="MyEasySchool Dashboard" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_c4affaa1.jpg" alt="MyEasySchool Mobile View" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.36_17f295b6.jpg" alt="MyEasySchool Feature" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2001.06.44_df9e89ce.jpg" alt="MyEasySchool Mobile App" loading="lazy"></div>
+
+                <div class="services-grid" data-reveal>
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-window-maximize"></i></div>
+                        <span class="service-index">01 — Web Application Development</span>
+                        <h3>Custom Web Applications</h3>
+                        <p>Modern, responsive web products built around your business goals and user needs.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                        <span class="service-index">02 — Mobile App Development</span>
+                        <h3>iOS &amp; Android Applications</h3>
+                        <p>Cross-platform mobile apps built with React Native and Expo, from concept to production.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <span class="service-index">03 — Backend &amp; API Development</span>
+                        <h3>Reliable Backend Systems</h3>
+                        <p>Scalable APIs, authentication, databases, and server-side systems that power your product.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <span class="service-index">04 — AI-Powered Solutions</span>
+                        <h3>AI Integration &amp; Automation</h3>
+                        <p>Practical AI features that improve products, automate workflows, and create smarter user experiences.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-pen-ruler"></i></div>
+                        <span class="service-index">05 — UI/UX &amp; Product Development</span>
+                        <h3>Interfaces Built for People</h3>
+                        <p>Clean, intuitive digital experiences designed to make products easier and more enjoyable to use.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-credit-card"></i></div>
+                        <span class="service-index">06 — Integrations &amp; Payments</span>
+                        <h3>Connect Everything Your Product Needs</h3>
+                        <p>Payment gateways, Google authentication, notifications, AI services, and third-party API integrations.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                        <span class="service-index">07 — MVP &amp; Product Development</span>
+                        <h3>From Idea to Working Product</h3>
+                        <p>Turn your concept into a functional MVP that can be tested, launched, and improved with real users.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <span class="service-index">08 — EdTech Solutions</span>
+                        <h3>Technology for Better Learning</h3>
+                        <p>Student platforms, CBT systems, learning tools, tutor solutions, and educational products built for real learning needs.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROCESS ============ -->
+        <section class="process section-wide scroll-animate has-ambient" id="process">
+            <span class="ambient ambient--strong ambient--b" aria-hidden="true" style="width:900px;height:620px;left:50%;margin-left:-450px;bottom:-18%;"></span>
+            <div class="section-inner">
+                <div class="section-head centered">
+                    <p class="eyebrow">Operations</p>
+                    <h2>Project Delivery <span class="highlight">Process</span></h2>
+                    <p>From idea to production, with a clear process at every step.</p>
+                </div>
+
+                <div class="process-grid" data-reveal>
+                    <div class="process-step">
+                        <div class="process-marker"><i class="fas fa-compass"></i></div>
+                        <span class="process-index">01 — Discovery</span>
+                        <h3>Understand the Product</h3>
+                        <ul class="process-list">
+                            <li>Project goals</li>
+                            <li>Business requirements</li>
+                            <li>Target users</li>
+                            <li>Core problems</li>
+                            <li>Feature requirements</li>
+                            <li>Existing systems / integrations</li>
+                        </ul>
+                        <p class="process-note">I first understand what you're trying to achieve before development begins.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-marker"><i class="fas fa-diagram-project"></i></div>
+                        <span class="process-index">02 — Planning</span>
+                        <h3>Define the Technical Roadmap</h3>
+                        <ul class="process-list">
+                            <li>Feature breakdown</li>
+                            <li>User flows &amp; functionality</li>
+                            <li>Technology selection</li>
+                            <li>Backend &amp; API requirements</li>
+                            <li>Database structure</li>
+                            <li>Development milestones</li>
+                        </ul>
+                        <p class="process-note">The project is broken into clear deliverables so you know what is being built and what to expect.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-marker"><i class="fas fa-code"></i></div>
+                        <span class="process-index">03 — Development</span>
+                        <h3>Build the Product</h3>
+                        <ul class="process-list">
+                            <li>Web application development</li>
+                            <li>Mobile app development</li>
+                            <li>Backend &amp; REST APIs</li>
+                            <li>Database integration</li>
+                            <li>Authentication</li>
+                            <li>Payment integration</li>
+                            <li>AI features &amp; third-party APIs</li>
+                        </ul>
+                        <p class="process-note">I turn the approved requirements into a functional, production-ready product.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-marker"><i class="fas fa-vial-circle-check"></i></div>
+                        <span class="process-index">04 — Testing &amp; Optimization</span>
+                        <h3>Make Sure It Works</h3>
+                        <ul class="process-list">
+                            <li>Feature testing</li>
+                            <li>API testing</li>
+                            <li>Bug fixing</li>
+                            <li>Cross-device testing</li>
+                            <li>Performance improvements</li>
+                            <li>Security considerations</li>
+                            <li>Final refinements</li>
+                        </ul>
+                        <p class="process-note">Every major feature is tested, issues are resolved, and the product is refined before launch.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="process-marker"><i class="fas fa-rocket"></i></div>
+                        <span class="process-index">05 — Deployment &amp; Support</span>
+                        <h3>Launch &amp; Keep It Running</h3>
+                        <ul class="process-list">
+                            <li>Production deployment</li>
+                            <li>Website deployment</li>
+                            <li>Mobile app release</li>
+                            <li>Server/API deployment</li>
+                            <li>Environment configuration</li>
+                            <li>Post-launch fixes</li>
+                            <li>Maintenance &amp; improvements</li>
+                        </ul>
+                        <p class="process-note">I don't stop at writing the code. I help get the product into production and support its continued improvement.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- ============ PROJECTS ============ -->
-        <section class="projects-showcase scroll-animate" id="projects">
+        <section class="projects-showcase scroll-animate has-ambient" id="projects">
+            <span class="ambient ambient--soft" aria-hidden="true" style="width:600px;height:600px;right:-14%;top:22%;"></span>
             <div class="section-head centered">
                 <p class="eyebrow">Selected Work</p>
-                <h2><span class="highlight">Projects</span> I've worked on</h2>
+                <h2><span class="highlight">Products</span> I've built and shipped</h2>
             </div>
             <div class="project-list">
                 <article class="project-item">
-                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-033900~2-KKUrwKMPeKqgxqdTLZosnaZqKUGYFQ.png?width=500&height=300" alt="SunRise" loading="lazy"></div>
+                    <div class="project-image-placeholder"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/ScreenShot%20Tool%20-20251203164922.png" alt="MyEasySchool dashboard" loading="lazy"></div>
                     <div class="project-details">
                         <span class="project-index">01</span>
+                        <span class="project-flag"><i class="fas fa-star"></i> Founder</span>
+                        <h3>MyEasySchool</h3>
+                        <p>An edutech platform for Gen Z that I started in my dorm and scaled across universities in Nigeria to over <strong>3,000 users</strong> — tutorial lessons, CBT quizzes, flashcards, solution manuals and more, built to make studying easier.</p>
+                        <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Node.js</span><span>Express.js</span><span>Paystack API</span><span>Render</span></div>
+                        <div class="project-buttons">
+                            <a href="https://myeasyschool.org/" class="btn btn-primary">View Site</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-item alt-layout">
+                    <div class="project-details">
+                        <span class="project-index">02</span>
                         <h3>SunRise Enterprise</h3>
                         <p>I built this multi-purpose cooperative platform to resonate with the brand's eco-friendly ethos. Using a nature-inspired color palette and intuitive navigation.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
@@ -1216,11 +1717,13 @@
                             <a href="https://github.com/Dannyblue12/SunRise-website" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-033900~2-KKUrwKMPeKqgxqdTLZosnaZqKUGYFQ.png?width=500&height=300" alt="SunRise Enterprise" loading="lazy"></div>
                 </article>
 
-                <article class="project-item alt-layout">
+                <article class="project-item">
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034347~2-za7DZj91N0SCU9mmEIMV7BncsxUO4D.png?width=500&height=300" alt="Stream of Grace" loading="lazy"></div>
                     <div class="project-details">
-                        <span class="project-index">02</span>
+                        <span class="project-index">03</span>
                         <h3>Stream of Grace</h3>
                         <p>Faith-based organization digital experience focusing on serene and uplifting tones. Harmonious and inspiring design that left the client stunned.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Youtube API</span></div>
@@ -1229,13 +1732,11 @@
                             <a href="https://github.com/Codex-247/Stream-of-Grace" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
-                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034347~2-za7DZj91N0SCU9mmEIMV7BncsxUO4D.png?width=500&height=300" alt="Stream of Grace" loading="lazy"></div>
                 </article>
 
-                <article class="project-item">
-                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034027~2-GDpwC6CeGweyj0G87gK0T4lskizbNU.png?width=100%&height=300" alt="Mono Education" loading="lazy"></div>
+                <article class="project-item alt-layout">
                     <div class="project-details">
-                        <span class="project-index">03</span>
+                        <span class="project-index">04</span>
                         <h3>Mono Education</h3>
                         <p>Educational consulting website designed to be informative, trustworthy, and easy to navigate.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
@@ -1244,11 +1745,13 @@
                             <a href="https://github.com/Dannyblue12/Mono-Education" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-034027~2-GDpwC6CeGweyj0G87gK0T4lskizbNU.png?width=100%&height=300" alt="Mono Education" loading="lazy"></div>
                 </article>
 
-                <article class="project-item alt-layout">
+                <article class="project-item">
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-051031~2-eUsBJmoOtXnDUHp06CIruQYBQhyHpw.png?width=500&height=300" alt="ChainGuild" loading="lazy"></div>
                     <div class="project-details">
-                        <span class="project-index">04</span>
+                        <span class="project-index">05</span>
                         <h3>ChainGuild</h3>
                         <p>Web3 platform designed to connect gamers and developers. Futuristic engaging UI/UX with tech-savvy elements.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
@@ -1257,13 +1760,11 @@
                             <a href="https://github.com/Dannyblue12/ChainGuild" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
-                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250618-051031~2-eUsBJmoOtXnDUHp06CIruQYBQhyHpw.png?width=500&height=300" alt="ChainGuild" loading="lazy"></div>
                 </article>
 
-                <article class="project-item">
-                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250613-145441~2-Ga0CoRv46XRR8zIs1WzVV6VhNzc7Af.png?width=500&height=300" alt="Beauty Spa" loading="lazy"></div>
+                <article class="project-item alt-layout">
                     <div class="project-details">
-                        <span class="project-index">05</span>
+                        <span class="project-index">06</span>
                         <h3>Beauty Spa Pitch Site</h3>
                         <p>Calming vibe and tranquility design focusing on soft colors and elegant typography. A mood-driven design exercise.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
@@ -1272,20 +1773,20 @@
                             <a href="https://github.com/Dannyblue12/Beauty-Spa" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
+                    <div class="project-image-placeholder"><img src="https://e7guoqvcdebehi5h.public.blob.vercel-storage.com/Screenshot_20250613-145441~2-Ga0CoRv46XRR8zIs1WzVV6VhNzc7Af.png?width=500&height=300" alt="Beauty Spa" loading="lazy"></div>
                 </article>
 
-                <article class="project-item alt-layout">
+                <article class="project-item">
+                    <div class="project-image-placeholder"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2012.07.40_d42980c5.jpg" alt="Learn With Ease" loading="lazy"></div>
                     <div class="project-details">
-                        <span class="project-index">06</span>
+                        <span class="project-index">07</span>
                         <h3>Learn With Ease</h3>
                         <p>Educational outreach program with impact. Clean minimalistic design clearly communicating core values.</p>
                         <div class="project-tech-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
                         <div class="project-buttons">
                             <a href="https://www.learnwitheaseinitiative.org/" class="btn btn-primary">View Site</a>
-                            <a href="#" class="btn btn-outline" style="opacity:0.45; cursor:not-allowed;">GitHub</a>
                         </div>
                     </div>
-                    <div class="project-image-placeholder"><img src="https://vorv4jye8h09tbza.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-01%20at%2012.07.40_d42980c5.jpg" alt="Learn With Ease" loading="lazy"></div>
                 </article>
             </div>
         </section>
@@ -1293,9 +1794,10 @@
         <!-- ============ CONTACT ============ -->
         <section class="connect-cta scroll-animate" id="contact">
             <div class="connect-content">
+                <span class="ambient" aria-hidden="true" style="width:820px;height:520px;left:50%;margin-left:-410px;bottom:-26%;"></span>
                 <p class="eyebrow">Contact</p>
-                <h2>Let's build something <span class="highlight">memorable</span>.</h2>
-                <p>Let's build something memorable and outstanding together. I'm excited to hear about your ideas and collaborate on your next big project!</p>
+                <h2>You bring the idea. I help turn it into <span class="highlight">something real</span>.</h2>
+                <p>Tell me what you're building. Whether it's a web app, a mobile product, a backend system or an AI feature, I'll help you take it from concept to production.</p>
                 <a href="https://wa.link/dm2pg6" class="btn btn-primary btn-large">Let's Talk <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
@@ -1313,7 +1815,7 @@
     </main>
 
     <footer class="main-footer-bottom">
-        <p>&copy; <span id="currentYear"></span> Daniel. All rights reserved. Crafted with <i class="fas fa-heart highlight"></i>.</p>
+        <p>&copy; <span id="currentYear"></span> Daniel Victor Udo. All rights reserved. Crafted with <i class="fas fa-heart highlight"></i>.</p>
     </footer>
 
     <script>
@@ -1347,7 +1849,9 @@
         /* ---- Footer year ---- */
         document.getElementById("currentYear").textContent = new Date().getFullYear();
 
-        /* ---- Smooth anchor scrolling with header offset ---- */
+        /* ---- Smooth anchor scrolling with header offset ----
+           offsetTop is the layout position, so reveal transforms
+           on the target section cannot skew where we land. */
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener("click", function (e) {
             const hash = this.getAttribute("href");
@@ -1389,23 +1893,32 @@
           autoplay();
         }
 
-        /* ---- Reveal on scroll ---- */
-        window.addEventListener("load", () => document.body.classList.add("loaded"));
-        if (document.readyState === "complete") document.body.classList.add("loaded");
+        /* ---- Hero load choreography ---- */
+        const startHero = () => document.body.classList.add("loaded");
+        if (document.readyState === "complete") startHero();
+        else window.addEventListener("load", startHero);
+        // Never leave the hero hidden if an asset stalls the load event
+        setTimeout(startHero, 1600);
+
+        /* ---- Staggered reveals ---- */
+        document.querySelectorAll("[data-reveal]").forEach(group => {
+          Array.from(group.children).forEach((child, i) => {
+            child.style.transitionDelay = (i * 80) + "ms";
+          });
+        });
 
         const revealObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              revealObserver.unobserve(entry.target);
-            }
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add(entry.target.hasAttribute("data-reveal") ? "in" : "visible");
+            revealObserver.unobserve(entry.target);
           });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-        document.querySelectorAll(".scroll-animate").forEach(el => revealObserver.observe(el));
+        document.querySelectorAll(".scroll-animate, [data-reveal]").forEach(el => revealObserver.observe(el));
 
         /* ---- Active nav link ---- */
-        const navLinks = Array.from(document.querySelectorAll('.main-nav a, .mobile-nav a'))
+        const navLinks = Array.from(document.querySelectorAll(".main-nav a, .mobile-nav a"))
           .filter(link => (link.getAttribute("href") || "").startsWith("#"));
         const sections = [...new Set(
           navLinks.map(link => document.querySelector(link.getAttribute("href"))).filter(Boolean)
