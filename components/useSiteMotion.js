@@ -75,7 +75,11 @@ export function useReveal() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      // threshold 0, not a ratio: a section taller than
+      // viewport / threshold can never show enough of itself to satisfy a
+      // ratio, so Projects silently stayed hidden on phones. Firing on the
+      // first pixel of intersection works at any section height.
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" }
     );
 
     targets.forEach((t) => observer.observe(t));
