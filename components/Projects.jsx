@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaArrowRight, FaStar } from "react-icons/fa6";
+import { FaArrowRight, FaGooglePlay, FaStar } from "react-icons/fa6";
 import { CLIENT_WORK, FLAGSHIP } from "@/lib/content";
 
 function Flagship({ project }) {
@@ -61,16 +61,28 @@ function Flagship({ project }) {
               <span key={t}>{t}</span>
             ))}
           </div>
-          {project.site && (
-            <a
-              href={project.site}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Site <FaArrowRight />
-            </a>
-          )}
+          <div className="flagship-links">
+            {project.playStore && (
+              <a
+                href={project.playStore}
+                className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGooglePlay /> Google Play
+              </a>
+            )}
+            {project.site && (
+              <a
+                href={project.site}
+                className={`btn ${project.playStore ? "btn-outline" : "btn-primary"}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Site <FaArrowRight />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </article>

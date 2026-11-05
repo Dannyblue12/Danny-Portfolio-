@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { FaArrowDown, FaArrowRight } from "react-icons/fa6";
 import { PERSON } from "@/lib/seo";
+import HeroAmbience from "./HeroAmbience";
+import HeroWaves from "./HeroWaves";
 import StatTicker from "./StatTicker";
 import { scrollToHash } from "./useSiteMotion";
 import portrait from "@/public/daniel-victor-udo.png";
@@ -31,6 +33,8 @@ export default function Hero() {
       <div className="hero-stage">
         <span className="hero-glow" aria-hidden="true" />
         <span className="hero-glow hero-glow--b" aria-hidden="true" />
+        <HeroWaves />
+        <HeroAmbience />
 
         <span className="hero-tag animate-on-load fade-up-delay-1">
           <em />
