@@ -46,7 +46,15 @@ function Flagship({ project }) {
       </div>
 
       <div className="flagship-body">
-        <p>{project.body}</p>
+        <div className="flagship-copy">
+          <p>{project.body}</p>
+          {project.notes && (
+            <p className="flagship-notes">
+              <span>Under the hood</span>
+              {project.notes}
+            </p>
+          )}
+        </div>
         <div className="flagship-meta">
           <div className="project-tech-stack">
             {project.tech.map((t) => (
